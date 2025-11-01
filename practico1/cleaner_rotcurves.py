@@ -1,8 +1,6 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.signal import find_peaks
-
 
 BASE_PATH = "Rotcurves/"
 
@@ -24,13 +22,6 @@ class Rotcurve:
         max_idx = self.data["Vc"].idxmax()
         self.max = (self.data.loc[max_idx, "R"], self.data.loc[max_idx, "Vc"])
 
-        # Calcular picos locales
-        Vc_values = self.data["Vc"].values
-        peaks_idx, _ = find_peaks(Vc_values, height=50, distance=5)
-        self.peaks = [
-            (self.data.loc[idx, "R"], self.data.loc[idx, "Vc"]) for idx in peaks_idx
-        ]
-        self.num_peaks = len(self.peaks)
 
     @staticmethod
     def get_name(file_path):
@@ -64,9 +55,8 @@ Rotcurves = {i: Rotcurve(i) for i in range(1, 230)}
 rotcurve_properties = {
     i: {
         "name": Rotcurves[i].name,
-        "max": Rotcurves[i].max,
-        "num_peaks": Rotcurves[i].num_peaks,
-        "peaks": Rotcurves[i].peaks,
+        "max_R": Rotcurves[i].max[0],
+        "max_Vc": Rotcurves[i].max[1],
     }
     for i in range(1, 230)
 }
