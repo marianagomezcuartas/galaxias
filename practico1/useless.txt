@@ -1,0 +1,11 @@
+corte manual (al primero)
+5(ld)
+13 (ld)
+57
+
+maximo dif del pico
+16 (seria como el segundo)
+
+casos raros
+38
+64
